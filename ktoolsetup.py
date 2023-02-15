@@ -16,7 +16,7 @@ signal.signal(signal.SIGINT, handler)
 
 def menu():
     while(True):
-        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n")
+        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n")
         dizi=deger.split(",")
         for a in dizi:
             print(a)
@@ -28,6 +28,10 @@ def menu():
                 CMSMap()
             elif a=="4":
                 Beef()
+            elif a=="5":
+                Snap()
+            elif a=="6":
+                VSCode()
         input(Fore.GREEN + "Kurulumlar yapıldı.\nDevam etmek için Enter'a basın.")
         break
 
@@ -70,8 +74,12 @@ def Beef():
     #print(Fore.GREEN + "Beef kuruldu")
 
 def Snap():
+    print("Snap kuruluyor.")
     os.system("sudo apt install snapd")
     os.system("systemctl enable --now snapd.apparmor")
     print("Snap kuruldu denemek için hello-world indiriliyor")
     os.system("snap install hello-world")
     os.system("hello-world")
+def VSCode():
+    print("Visual Studio Code kuruluyor.")
+    os.system("sudo snap install code --classic")
