@@ -1,5 +1,8 @@
 import os
 import signal
+import requests
+import urllib.request
+from bs4 import BeautifulSoup
 import colorama
 from colorama import Fore
 from configparser import SafeConfigParser
@@ -15,7 +18,7 @@ signal.signal(signal.SIGINT, handler)
 
 def menu():
     while(True):
-        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n7)Geri Git\n")
+        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n7)Tor Browser(Şuanlık sadece tar dosyası)\n8)Geri Git\n")
         dizi=deger.split(",")
         for a in dizi:
             print(a)
@@ -32,6 +35,8 @@ def menu():
             elif a=="6":
                 VSCode()
             elif a=="7":
+                torBrowser()
+            elif a=="8":
                 break
         input(Fore.GREEN + "Kurulumlar yapıldı.\nDevam etmek için Enter'a basın.")
         break
@@ -65,7 +70,7 @@ def set_config_CMSMap(section,option,value):
         with open(config_file,"w") as conf_file:
             parser.write(conf_file)
             return True
-
+#-------------------------------------------------------------
 def Beef():
     print(Fore.YELLOW + "Beef indiriliyor.")
     os.system("git clone https://github.com/beefproject/beef")
@@ -79,8 +84,9 @@ def Snap():
     text= file.read()
     snapbin=":/snap/bin"
     usrgames=":/usr/games"
-
+    
     print("Snap kuruluyor.")
+    os.system("sudo apt install python3 python3-pip")
     os.system("sudo apt update")
     os.system("sudo apt install snapd")
     os.system("systemctl enable --now snapd apparmor")
@@ -97,3 +103,16 @@ def Snap():
 def VSCode():
     print("Visual Studio Code kuruluyor.")
     os.system("sudo snap install code --classic")
+
+def torBrowser():
+    url = "https://www.torproject.org/download/"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    download_links = soup.find_all('a', href=True, string="Download for Linux")
+
+    if len(download_links) == 0:
+        print("Could not find download link")
+    else:
+        download_url = download_links[0]['href']
+        print(f"Downloading from {download_url}")
+        urllib.request.urlretrieve(download_url, "torbrowser-install.tar.xz")
