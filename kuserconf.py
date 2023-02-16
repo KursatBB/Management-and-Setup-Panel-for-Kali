@@ -6,12 +6,14 @@ from colorama import Fore
 
 def menu():
     while(True):
-        deger= int(input("Ne yapacağınızı seçin : \n1)Yeni Kullanıcı Ekle\n2)Kullanıcı Şifresi Değiştir\n"))
+        deger= int(input("Ne yapacağınızı seçin : \n1)Yeni Kullanıcı Ekle\n2)Kullanıcı Şifresi Değiştir\n3)Geri git"))
         for a in deger:
             if a=="1":
                 addNewUser()
             elif a=="2":
                 changePasswd()
+            elif a=="3":
+                break
         break
 
 def addNewUser():

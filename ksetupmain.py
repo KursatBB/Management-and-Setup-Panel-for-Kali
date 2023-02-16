@@ -12,12 +12,12 @@ def updateUpgrade():
     os.system("sudo apt install python3 python3-pip")
     print(Fore.YELLOW + "Sistem güncellemeleri başlıyor.")
     os.system("sudo apt update -y && sudo apt upgrade -y")
-    distUpg=input(Fore.YELLOW + "Genel güncelleme ve geliştirme bitti\nDağıtımın güncellenmesini ister misiniz(E veya H) : " + Fore.WHITE)
-    if distUpg=="E" or "e":
+    distUpg=input(Fore.YELLOW + "Genel güncelleme ve geliştirme bitti\nDağıtımın güncellenmesini ister misiniz(E veya H) : ")
+    if distUpg=="E" or distUpg=="e":
         os.system("sudo apt update && sudo dist-upgrade -y")
         print(Fore.GREEN + "\nDağıtım güncellemesi bitti, gerekli olmayan paketler siliniyor\n" + Fore.WHITE)
         os.system("sudo apt autoremove -y")
-    elif distUpg=="H" or "h":
+    elif distUpg=="H" or distUpg=="h":
         print(Fore.GREEN + "\nDağıtım güncellemesi olmayacak, gerekli olmayan paketler siliniyor\n" + Fore.WHITE)
         os.system("sudo apt autoremove -y")
 

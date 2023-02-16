@@ -13,10 +13,9 @@ def handler(signum, frame):
     exit(1)
 signal.signal(signal.SIGINT, handler)
 
-
 def menu():
     while(True):
-        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n")
+        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n7)Geri Git\n")
         dizi=deger.split(",")
         for a in dizi:
             print(a)
@@ -32,6 +31,8 @@ def menu():
                 Snap()
             elif a=="6":
                 VSCode()
+            elif a=="7":
+                break
         input(Fore.GREEN + "Kurulumlar yapıldı.\nDevam etmek için Enter'a basın.")
         break
 
@@ -82,15 +83,17 @@ def Snap():
     print("Snap kuruluyor.")
     os.system("sudo apt update")
     os.system("sudo apt install snapd")
-    os.system("systemctl enable --now snapd.apparmor")
+    os.system("systemctl enable --now snapd apparmor")
     if snapbin in text:
         print("Snap kuruldu Kullanabilmek için sistemi yeniden başlatın.")
     else:
         if usrgames in text:
+            file.seek(0)
+            file.truncate()
             new_text= text.replace(usrgames, usrgames + snapbin)
             file.write(new_text)
             file.close()
-    
+            print("Snap kuruldu Kullanabilmek için sistemi yeniden başlatın.")
 def VSCode():
     print("Visual Studio Code kuruluyor.")
     os.system("sudo snap install code --classic")
