@@ -74,12 +74,23 @@ def Beef():
     #print(Fore.GREEN + "Beef kuruldu")
 
 def Snap():
+    file = open("/etc/environment","r+")
+    text= file.read()
+    snapbin=":/snap/bin"
+    usrgames=":/usr/games"
+
     print("Snap kuruluyor.")
+    os.system("sudo apt update")
     os.system("sudo apt install snapd")
     os.system("systemctl enable --now snapd.apparmor")
-    print("Snap kuruldu denemek için hello-world indiriliyor")
-    os.system("snap install hello-world")
-    os.system("hello-world")
+    if snapbin in text:
+        print("Snap kuruldu Kullanabilmek için sistemi yeniden başlatın.")
+    else:
+        if usrgames in text:
+            new_text= text.replace(usrgames, usrgames + snapbin)
+            file.write(new_text)
+            file.close()
+    
 def VSCode():
     print("Visual Studio Code kuruluyor.")
     os.system("sudo snap install code --classic")
