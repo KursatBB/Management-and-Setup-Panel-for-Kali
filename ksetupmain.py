@@ -8,10 +8,11 @@ import kuserconf
 ascii_banner=pyfiglet.figlet_format("KeK Setup")
 
 def updateUpgrade():
-    print(Fore.YELLOW + "Python Güncelleniyor.")
+    print(Fore.GREEN + "Python Güncelleniyor.")
     os.system("sudo apt install python3 python3-pip")
-    print(Fore.YELLOW + "Sistem güncellemeleri başlıyor.")
+    print(Fore.GREEN + "Sistem güncellemeleri başlıyor.")
     os.system("sudo apt update -y && sudo apt upgrade -y")
+    os.system("sudo apt install software-properties-common")
     distUpg=input(Fore.YELLOW + "Genel güncelleme ve geliştirme bitti\nDağıtımın güncellenmesini ister misiniz(E veya H) : ")
     if distUpg=="E" or distUpg=="e":
         os.system("sudo apt update && sudo dist-upgrade -y")

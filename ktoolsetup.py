@@ -74,9 +74,10 @@ def set_config_CMSMap(section,option,value):
 def Beef():
     print(Fore.YELLOW + "Beef indiriliyor.")
     os.system("git clone https://github.com/beefproject/beef")
+    os.system("sudo apt install software-properties-common")
     os.system("sudo apt-add-repository -y ppa:brightbox/ruby-ng")
     os.system("cd beef")
-    os.system("./install")
+    os.system("./beef/install")
     #print(Fore.GREEN + "Beef kuruldu")
 
 def Snap():
