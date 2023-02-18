@@ -72,13 +72,35 @@ def set_config_CMSMap(section,option,value):
             return True
 #-------------------------------------------------------------
 def Beef():
+
+    userF="user:"
+    passwdF="passwd:"
+
     print(Fore.YELLOW + "Beef indiriliyor.")
     os.system("git clone https://github.com/beefproject/beef")
-    os.system("sudo apt install software-properties-common")
+    os.system("sudo apt install software-properties-common -y")
     os.system("sudo apt-add-repository -y ppa:brightbox/ruby-ng")
-    os.system("cd beef")
-    os.system("./beef/install")
-    #print(Fore.GREEN + "Beef kuruldu")
+    os.chdir("./beef/")
+    os.system("./install")
+    file = open("config.yaml","r+")
+    text= file.read()
+    print(Fore.GREEN + "Beef kuruldu\nBeef'in varsayılan giriş bilgilerini değiştirmek için kullanıcı adı ve şifresini girin :\n")
+    username=input("Kullanıcı adı : \n")
+    passwd = input("Şifre : \n")
+    if userF in text:
+        file.seek(0)
+        file.truncate()
+        new_text= text.replace(userF, userF + username)
+        file.write(new_text)
+    if passwdF in text:
+        file.seek(0)
+        file.truncate()
+        new_text=text.replace(passwdF,passwdF + passwd)
+        file.write(new_text)
+        file.close()
+    print("Beef kurulumu tamamlandı yeni giriş bilgilerinizle beef'i kullanabilirsiniz (./beef)")
+
+    
 
 def Snap():
     file = open("/etc/environment","r+")
