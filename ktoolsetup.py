@@ -72,10 +72,8 @@ def set_config_CMSMap(section,option,value):
             return True
 #-------------------------------------------------------------
 def Beef():
-
     userF="user:"
     passwdF="passwd:"
-
     print(Fore.YELLOW + "Beef indiriliyor.")
     os.system("git clone https://github.com/beefproject/beef")
     os.system("sudo apt install software-properties-common -y")
@@ -85,20 +83,25 @@ def Beef():
     file = open("config.yaml","r+")
     text= file.read()
     print(Fore.GREEN + "Beef kuruldu\nBeef'in varsayılan giriş bilgilerini değiştirmek için kullanıcı adı ve şifresini girin :\n")
-    username=input("Kullanıcı adı : \n")
-    passwd = input("Şifre : \n")
-    if userF in text:
+    username=input("Kullanıcı adı : ")
+    passwd = input("Şifre : ")
+    if '"beef"' in text:
         file.seek(0)
         file.truncate()
-        new_text= text.replace(userF, userF + username)
+        new_text=text.replace('"beef"',"")
         file.write(new_text)
-    if passwdF in text:
-        file.seek(0)
-        file.truncate()
-        new_text=text.replace(passwdF,passwdF + passwd)
-        file.write(new_text)
-        file.close()
-    print("Beef kurulumu tamamlandı yeni giriş bilgilerinizle beef'i kullanabilirsiniz (./beef)")
+        if userF in new_text:
+            file.seek(0)
+            file.truncate()
+            new_text=new_text.replace(userF,userF+ ' "'+username + '"')
+            file.write(new_text)
+            if passwdF in new_text:
+                file.seek(0)
+                file.truncate()
+                new_text=new_text.replace(passwdF,passwdF+ ' "'+passwd + '"')
+                file.write(new_text)
+                file.close()
+    print("Beef giriş bilgileri ayarlandı, yeni giriş bilgilerinizle beef'i kullanabilirsiniz (./beef)")
 
     
 
