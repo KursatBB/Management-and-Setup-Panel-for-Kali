@@ -12,7 +12,9 @@ def updateUpgrade():
     os.system("sudo apt install python3 python3-pip")
     print(Fore.GREEN + "Sistem güncellemeleri başlıyor.")
     os.system("sudo apt update -y && sudo apt upgrade -y")
+    os.system("sudo updatedb")
     os.system("sudo apt install software-properties-common")
+    os.system("pip3 install --upgrade pip")
     distUpg=input(Fore.YELLOW + "Genel güncelleme ve geliştirme bitti\nDağıtımın güncellenmesini ister misiniz(E veya H) : ")
     if distUpg=="E" or distUpg=="e":
         os.system("sudo apt update && sudo dist-upgrade -y")

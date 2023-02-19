@@ -62,10 +62,10 @@ def CMSMap():
     os.system("git clone https://github.com/Dionach/CMSmap")
     set_config_CMSMap("exploitdb","edbtype","APT")
     set_config_CMSMap("exploitdb","edbpath","/usr/share/exploitdb/")
-    os.system("cd CMSmap")
-    os.system("pip3 install .")
+    os.chdir("./CMSmap")
+    os.system("sudo pip3 install .")
 def set_config_CMSMap(section,option,value):
-    if parser.has_section(section,option,value):
+    if parser.has_section(section):
         parser.set(section, option,value)
         with open(config_file,"w") as conf_file:
             parser.write(conf_file)
