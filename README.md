@@ -3,4 +3,4 @@ When you setup new kali VM you need to config somethings like update upgrade or 
 For now i am tried for Kali 2022.4 version.
 
 # Usage
-`python ksetupmain.py `
+`sudo python ksetupmain.py `
