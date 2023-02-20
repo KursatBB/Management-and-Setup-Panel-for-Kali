@@ -140,6 +140,6 @@ def torBrowser():
         print("Could not find download link")
     else:
         download_url = download_links[0]['href']
-        print(f"Downloading from {'www.torproject.org/'+download_url}")
-        urllib.request.urlretrieve('www.torproject.org/'+download_url, "torbrowser-install.tar.xz")
+        print(f"Downloading from {'https://www.torproject.org'+download_url}")
+        urllib.request.urlretrieve('https://www.torproject.org'+download_url, "torbrowser-install.tar.xz")
         os.system("tar -xf torbrowser-install.tar.xz")
