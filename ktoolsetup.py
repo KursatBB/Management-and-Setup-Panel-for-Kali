@@ -18,7 +18,17 @@ signal.signal(signal.SIGINT, handler)
 
 def menu():
     while(True):
-        deger= input("Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :\nAraç Listesi : \n1)openVAS\n2)GoBuster\n3)CMSmap\n4)Beef\n5)Snap\n6)VSCode(snap ile kurulur)\n7)Tor Browser(Şuanlık sadece tar dosyası)\n8)Geri Git\n")
+        deger= input("""Hangi aracı/araçları indirmek istersiniz aralarında virgül olacak şekilde girin (1,3 vb.) :
+        \nAraç Listesi : \n1)openVAS
+        \n2)GoBuster
+        \n3)CMSmap
+        \n4)Beef
+        \n5)Snap
+        \n6)VSCode(snap ile kurulur)
+        \n7)Tor Browser
+        \n8)Uniscan
+        \n9)ZAP
+        \n10)Geri Git""")
         dizi=deger.split(",")
         for a in dizi:
             print(a)
@@ -37,6 +47,10 @@ def menu():
             elif a=="7":
                 torBrowser()
             elif a=="8":
+                Uniscan()
+            elif a=="9":
+                ZAP()
+            elif a=="10":
                 break
         input(Fore.GREEN + "Kurulumlar yapıldı.\nDevam etmek için Enter'a basın.")
         break
@@ -143,3 +157,16 @@ def torBrowser():
         print(f"Downloading from {'https://www.torproject.org'+download_url}")
         urllib.request.urlretrieve('https://www.torproject.org'+download_url, "torbrowser-install.tar.xz")
         os.system("tar -xf torbrowser-install.tar.xz")
+
+def Uniscan():
+    os.system("sudo apt install uniscan")
+def ZAP():
+    url = "https://www.zaproxy.org/download/"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    link = soup.find_all("a", href=lambda href: href and href.endswith("unix.sh"))
+    download_link = link["href"]
+    file_name = download_link.split("/")[-1]
+    os.system(f"wget {download_link} -O {file_name}")
+    os.system("chmod 700 *unix.sh")
+    os.system("./*unix.sh")
