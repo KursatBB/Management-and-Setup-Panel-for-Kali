@@ -28,7 +28,8 @@ def menu():
         \n7)Tor Browser
         \n8)Uniscan
         \n9)ZAP
-        \n10)Geri Git""")
+        \n10)Armitage
+        \n11)Geri Git/(Enter)\n""")
         dizi=deger.split(",")
         for a in dizi:
             print(a)
@@ -51,6 +52,8 @@ def menu():
             elif a=="9":
                 ZAP()
             elif a=="10":
+                Armitage()
+            elif a=="11":
                 break
         input(Fore.GREEN + "Kurulumlar yapıldı.\nDevam etmek için Enter'a basın.")
         break
@@ -170,3 +173,13 @@ def ZAP():
     os.system(f"wget {download_link} -O {file_name}")
     os.system("chmod 700 *unix.sh")
     os.system("./*unix.sh")
+
+def Armitage():
+    os.system("service postgresql start")
+    os.system("service metasploit start")
+    os.system("service metasploit stop")
+    os.system("apt-get update")
+    os.system("apt-get install armitage")
+    os.system("update-java-alternatives --jre -s java 1.7.0-openjdk-amd64")
+#def Vuls():
+
