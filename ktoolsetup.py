@@ -168,7 +168,7 @@ def ZAP():
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     link = soup.find_all("a", href=lambda href: href and href.endswith("unix.sh"))
-    download_link = link["href"]
+    download_link = str(link[0]["href"])
     file_name = download_link.split("/")[-1]
     os.system(f"wget {download_link} -O {file_name}")
     os.system("chmod 700 *unix.sh")
